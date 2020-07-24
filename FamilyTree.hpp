@@ -29,7 +29,7 @@ namespace family{
 		void display(); // print the Tree
 		void remove(string name); // Delete all sub-tree of the name we got
 		string find(string relation); // returns the name that feet to the relation we got  
-		string relation(string rfamilyRelation); // returns the relation between me and the name
+		string relation(string name); // returns the relation between me and the name
 		
 		private:
 		

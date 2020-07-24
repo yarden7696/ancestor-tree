@@ -36,5 +36,5 @@ namespace family{
                 Tree* Tree::findTheSon (Tree* cur, string son){
 		void displayHelp(int space);
 		string findGeneration(int height);
-	};
+	 };
 };

@@ -106,8 +106,9 @@ Tree* searchName(Tree* cur, string toSearch){
 	return nullptr;
 }
 
-string Tree::find(string s) {
-      Tree* ans = searchName(this, s);
+// returns the name that feet to the relation we got 
+string Tree::find(string relation) {
+      Tree* ans = searchName(this, relation);
       //if we find the requested relation return his name
       if (ans != nullptr) return ans->name;
 	else throw runtime_error("unexist");

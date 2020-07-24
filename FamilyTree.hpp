@@ -32,7 +32,8 @@ namespace family{
 		string relation(string rfamilyRelation); // returns the relation between me and the name
 		
 		private:
-		Tree* findWhere (Tree* cur, string toSearch);
+		
+                Tree* Tree::findTheSon (Tree* cur, string son){
 		void displayHelp(int space);
 		string findGeneration(int height);
 	};

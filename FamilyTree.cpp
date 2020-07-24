@@ -128,14 +128,13 @@ string Tree::findGeneration(int height){
 
 // Delete all sub-tree of the name we got
 void Tree::remove(string name) {
-	Tree* toRemove = findTheSon(this, name);
-    //if we try to remove the root throw error
-	if (toRemove == this) throw runtime_error("Error - can't remove the root");
-     //we find what tree to remove - remove him and the help tree for relation
-	if(toRemove!=nullptr){
+	
+	Tree* toRemove = findTheSon(this, name); // find the node we wont to delete his sub tree
+	if (toRemove == this) throw runtime_error("Error - can't remove the root");  //if we try to remove the root throw error
+	if(toRemove!=nullptr) {
             if (toRemove->Tchild->Tmother == toRemove) toRemove->Tchild->Tmother = nullptr;
             if (toRemove->Tchild->Tfather == toRemove) toRemove->Tchild->Tfather = nullptr; 
             delete toRemove;
       }
-      else throw runtime_error("The given name unexist");
+      else throw runtime_error(" The given name not exist in the Tree ");
 }

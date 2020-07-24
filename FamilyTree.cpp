@@ -5,36 +5,36 @@
 using namespace std;
 using namespace family;
 
+// Helper function that finds a Node in the tree, "son" is the Node's name
 Tree* Tree::findTheSon (Tree* cur, string son){
-      if (cur->name==son) return cur; 
-      if (cur->Tfather!=nullptr){
-        Tree* ans = findWhere(cur->Tfather, son);
-        //we find where
-        if(ans != nullptr) return ans;
+	
+      if (cur->name==son) return cur; // root
+      if (cur->Tfather!=nullptr) { // start looking for the name in father's sub tree
+        Tree* ans = findTheSon(cur->Tfather, son); // calling recursivly father's tree
+        if(ans != nullptr) return ans; // we found the node that we are looking for
       }
-	if (cur->Tmother!=nullptr){
-            Tree* ans = findWhere(cur->Tmother, son);
-            if(ans != nullptr)
-            return ans;
+	if (cur->Tmother!=nullptr) { // start looking for the name in mother's sub tree
+            Tree* ans = findTheSon(cur->Tmother, son); // calling recursivly at mother's tree
+            if(ans != nullptr) return ans; // we found the node that we are looking for
       }
-	return nullptr;
+	return nullptr; // else- the Node not found at the tree
 }
 
 // Adding a father to someone who already exists in the Tree
 Tree& Tree::addFather(string son, string father) {
 	
-	Tree* toAdd = findWhere(this, son);
+	Tree* res = findTheSon(this, son); // find the node(son) that we wo
     //if we find where to add the father
-	if (toAdd != nullptr) {
+	if (res != nullptr) {
         //check if there is a father
-            if (toAdd->Tfather == nullptr){
-                  toAdd->Tfather = new Tree(father);
-                  toAdd->Tfather->Tchild = toAdd;
-                  toAdd->Tfather->height = toAdd->height +1;
-                  toAdd->Tfather->gender = "father";
-                  string ans = findGeneration(toAdd->Tfather->height);
-                  ans += toAdd->Tfather->gender;
-                  toAdd->Tfather->rela = ans;
+            if (res->Tfather == nullptr){
+                  res->Tfather = new Tree(father);
+                  res->Tfather->Tchild = res;
+                  res->Tfather->height = res->height +1;
+                  res->Tfather->gender = "father";
+                  string ans = findGeneration(res->Tfather->height);
+                  ans += res->Tfather->gender;
+                  res->Tfather->rela = ans;
                   return *this;
             }
 		else throw runtime_error("Error - " + son+ " has a father"); 
@@ -42,19 +42,19 @@ Tree& Tree::addFather(string son, string father) {
 	else throw runtime_error("Error - "+son+ " doesn't exist"); 
 }
 
-Tree &Tree::addMother(string son, string mother) {
-	Tree* toAdd = findWhere(this, son);
+Tree& Tree::addMother(string son, string mother) {
+	Tree* res = findTheSon(this, son);
     //if we find where to add
-	if (toAdd != nullptr) {
+	if (res != nullptr) {
         //check if he doesn't have mother
-            if (toAdd->Tmother == nullptr){
-                  toAdd->Tmother = new Tree(mother);
-                  toAdd->Tmother->Tchild = toAdd;
-                  toAdd->Tmother->height = toAdd->height +1;
-                  toAdd->Tmother->gender = "mother";
-                  string ans = findGeneration(toAdd->Tmother->height);
-                  ans += toAdd->Tmother->gender;
-                  toAdd->Tmother->rela = ans;
+            if (res->Tmother == nullptr){
+                  res->Tmother = new Tree(mother);
+                  res->Tmother->Tchild = res;
+                  res->Tmother->height = res->height +1;
+                  res->Tmother->gender = "mother";
+                  string ans = findGeneration(res->Tmother->height);
+                  ans += res->Tmother->gender;
+                  res->Tmother->rela = ans;
                   return *this;
             }
 		else throw runtime_error("Error - " + son + " has a mother"); 
@@ -92,7 +92,7 @@ void Tree::displayHelp(int space){
 }
 
 string Tree::relation(string relative) {
-      Tree* ans = findWhere(this, relative);
+      Tree* ans = findTheSon(this, relative);
       //if we found the name in the tree return his relation
       if (ans != nullptr) return ans->rela;
       return "unrelated";
@@ -132,7 +132,7 @@ string Tree::findGeneration(int height){
 }
 
 void Tree::remove(string s) {
-	Tree* toRemove = findWhere(this, s);
+	Tree* toRemove = findTheSon(this, s);
     //if we try to remove the root throw error
 	if (toRemove == this) throw runtime_error("Error - can't remove the root");
      //we find what tree to remove - remove him and the help tree for relation

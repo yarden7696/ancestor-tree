@@ -91,27 +91,27 @@ string Tree::relation(string relative) {
       return "unrelated";
 }
 
-Tree* searchName(Tree* cur, string relation){
-      if (cur->rela==relation) return cur; 
-      if (cur->Tfather!=nullptr){
-        Tree* ans = searchName(cur->Tfather, relation);
-        //we find where
-        if(ans != nullptr) return ans;
+// Helper function that find the Node by the relation we got
+Tree* searchName(Tree* cur, string relation) {
+	
+      if (cur->rela==relation) return cur; // root
+      if (cur->Tfather!=nullptr) { // start looking for the name in father's sub tree
+        Tree* ans = searchName(cur->Tfather, relation);  // calling recursivly father's tree
+        if(ans != nullptr) return ans; // we found the node that we are looking for
       }
-	if (cur->Tmother!=nullptr){
-            Tree* ans = searchName(cur->Tmother, relation);
-            if(ans != nullptr)
-            return ans;
+	if (cur->Tmother!=nullptr) { // start looking for the name in mother's sub tree
+            Tree* ans = searchName(cur->Tmother, relation); // calling recursivly mother's tree
+            if(ans != nullptr) return ans; // we found the node that we are looking for
       }
-	return nullptr;
+	return nullptr; // else- the Node not found at the tree
 }
 
 // returns the name that feet to the relation we got 
 string Tree::find(string relation) {
-      Tree* ans = searchName(this, relation);
-      //if we find the requested relation return his name
-      if (ans != nullptr) return ans->name;
-	else throw runtime_error("unexist");
+	
+      Tree* ans = searchName(this, relation); // // ans is the node that we wont to return his name
+      if (ans != nullptr) return ans->name; // return ans's name
+	else throw runtime_error(" This relation not exist at the Tree"); 
 }
 
 // Helper function that finds the amount of generations relative to the root

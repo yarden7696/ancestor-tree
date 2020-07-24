@@ -91,15 +91,15 @@ string Tree::relation(string relative) {
       return "unrelated";
 }
 
-Tree* searchName(Tree* cur, string toSearch){
-      if (cur->rela==toSearch) return cur; 
+Tree* searchName(Tree* cur, string relation){
+      if (cur->rela==relation) return cur; 
       if (cur->Tfather!=nullptr){
-        Tree* ans = searchName(cur->Tfather, toSearch);
+        Tree* ans = searchName(cur->Tfather, relation);
         //we find where
         if(ans != nullptr) return ans;
       }
 	if (cur->Tmother!=nullptr){
-            Tree* ans = searchName(cur->Tmother, toSearch);
+            Tree* ans = searchName(cur->Tmother, relation);
             if(ans != nullptr)
             return ans;
       }

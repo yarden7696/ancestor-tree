@@ -20,8 +20,9 @@ Tree* Tree::findWhere (Tree* cur, string toSearch){
 	return nullptr;
 }
 
-Tree &Tree::addFather(string stringName, string father){
-	Tree* toAdd = findWhere(this, stringName);
+// Adding a father to someone who already exists in the Tree
+Tree& Tree::addFather(string son, string father){
+	Tree* toAdd = findWhere(this, son);
     //if we find where to add the father
 	if (toAdd != nullptr) {
         //check if there is a father
@@ -35,13 +36,13 @@ Tree &Tree::addFather(string stringName, string father){
                   toAdd->Tfather->rela = ans;
                   return *this;
             }
-		else throw runtime_error("Error - " + stringName+ " has a father"); 
+		else throw runtime_error("Error - " + son+ " has a father"); 
 	}
-	else throw runtime_error("Error - "+stringName+ " doesn't exist"); 
+	else throw runtime_error("Error - "+son+ " doesn't exist"); 
 }
 
-Tree &Tree::addMother(string stringName, string mother) {
-	Tree* toAdd = findWhere(this, stringName);
+Tree &Tree::addMother(string son, string mother) {
+	Tree* toAdd = findWhere(this, son);
     //if we find where to add
 	if (toAdd != nullptr) {
         //check if he doesn't have mother
@@ -55,9 +56,9 @@ Tree &Tree::addMother(string stringName, string mother) {
                   toAdd->Tmother->rela = ans;
                   return *this;
             }
-		else throw runtime_error("Error - " + stringName + " has a mother"); 
+		else throw runtime_error("Error - " + son + " has a mother"); 
 	}
-	else throw runtime_error("Error - "+ stringName + " doesn't exist"); 
+	else throw runtime_error("Error - "+ son + " doesn't exist"); 
 }
 
 /** Got this function to print the tree from :

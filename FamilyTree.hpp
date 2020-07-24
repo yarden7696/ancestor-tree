@@ -5,31 +5,31 @@
 using namespace std;
 
 namespace family{
+	
 	class Tree {
 		public:
-		string name;
-		Tree *Tfather;
-		Tree *Tmother;
-		Tree *Tchild;
-		string rela;
-		string gender;
+		
+		string name,rela,gender;
+		Tree *Tfather,*Tmother,*Tchild;
 		int height;
 		
 		public:
+		// CONSTRUCTOR
 		Tree(string s):
 		name(s),Tfather(nullptr),Tmother(nullptr),Tchild(nullptr), rela("me"),gender("me"),height(0){}
 		
+		// // DESTRUCTOR
 		~Tree(){
 			if(Tmother) delete Tmother;
 			if(Tfather) delete Tfather;
 		};
 
-		Tree &addFather(string name, string father);
-		Tree &addMother(string name, string father);
-		void display();
-		void remove(string toRemove);
-		string find(string toSearch);
-		string relation(string rfamilyRelation);
+		Tree &addFather(string name, string father); // Adding a father to someone who already exists at the Tree
+		Tree &addMother(string name, string father);  // Adding a mother to someone who already exists at the Tree
+		void display(); // print the Tree
+		void remove(string toRemove); // Delete all sub-tree of the name we got
+		string find(string toSearch); // returns the name that feet to the relation we got  
+		string relation(string rfamilyRelation); // returns the relation between me and the name
 		
 		private:
 		Tree* findWhere (Tree* cur, string toSearch);

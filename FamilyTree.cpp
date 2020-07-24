@@ -86,10 +86,10 @@ void Tree::displayHelp(int space){
 
 // returns the relation between me and the name
 string Tree::relation(string name) {
-      Tree* ans = findTheSon(this, name);
-      //if we found the name in the tree return his relation
-      if (ans != nullptr) return ans->rela;
-      return "unrelated";
+	
+      Tree* ans = findTheSon(this, name); // ans is the Node that we wont to return the ralation between "name" and the Root 
+      if (ans != nullptr) return ans->rela; // return ans's ralation
+      return "unrelated"; // else- the relation does not exist at the Tree
 }
 
 // Helper function that find the Node by the relation we got

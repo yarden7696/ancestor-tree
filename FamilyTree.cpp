@@ -59,15 +59,11 @@ Tree& Tree::addMother(string son, string mother) {
 	else throw runtime_error("Error - "+ son + " doesn't exist"); 
 }
 
-/** Got this function to print the tree from :
+/** Credit-
 * https://www.geeksforgeeks.org/print-binary-tree-2-dimensions/
-*
-* Function to print the tree in 2D
 * It does reverse inorder traversal
 **/
-void Tree::display(){
-  displayHelp(0);
-}
+void Tree::display() { displayHelp(0) ; }
 
 void Tree::displayHelp(int space){
   //increase distance between levels

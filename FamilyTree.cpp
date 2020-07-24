@@ -126,8 +126,9 @@ string Tree::findGeneration(int height){
   return ans;
 }
 
-void Tree::remove(string s) {
-	Tree* toRemove = findTheSon(this, s);
+// Delete all sub-tree of the name we got
+void Tree::remove(string name) {
+	Tree* toRemove = findTheSon(this, name);
     //if we try to remove the root throw error
 	if (toRemove == this) throw runtime_error("Error - can't remove the root");
      //we find what tree to remove - remove him and the help tree for relation

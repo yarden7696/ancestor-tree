@@ -28,7 +28,7 @@ namespace family{
 		Tree& addMother(string son, string father);  // Adding a mother to someone who already exists at the Tree
 		void display(); // print the Tree
 		void remove(string name); // Delete all sub-tree of the name we got
-		string find(string toSearch); // returns the name that feet to the relation we got  
+		string find(string relation); // returns the name that feet to the relation we got  
 		string relation(string rfamilyRelation); // returns the relation between me and the name
 		
 		private:

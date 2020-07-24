@@ -84,8 +84,9 @@ void Tree::displayHelp(int space){
   }
 }
 
-string Tree::relation(string relative) {
-      Tree* ans = findTheSon(this, relative);
+// returns the relation between me and the name
+string Tree::relation(string name) {
+      Tree* ans = findTheSon(this, name);
       //if we found the name in the tree return his relation
       if (ans != nullptr) return ans->rela;
       return "unrelated";

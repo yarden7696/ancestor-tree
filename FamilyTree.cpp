@@ -23,23 +23,21 @@ Tree* Tree::findTheSon (Tree* cur, string son){
 // Adding a father to someone who already exists in the Tree
 Tree& Tree::addFather(string son, string father) {
 	
-	Tree* res = findTheSon(this, son); // find the node(son) that we wo
-    //if we find where to add the father
+	Tree* res = findTheSon(this, son); // res is the node that we wont to add him father
 	if (res != nullptr) {
-        //check if there is a father
-            if (res->Tfather == nullptr){
-                  res->Tfather = new Tree(father);
-                  res->Tfather->Tchild = res;
-                  res->Tfather->height = res->height +1;
-                  res->Tfather->gender = "father";
-                  string ans = findGeneration(res->Tfather->height);
-                  ans += res->Tfather->gender;
-                  res->Tfather->rela = ans;
-                  return *this;
+            if (res->Tfather == nullptr) { // if res has no father so we will add him-
+                  res->Tfather = new Tree(father); // create the Node's father 
+                  res->Tfather->Tchild = res; // put to the father his son(res)
+                  res->Tfather->height = res->height +1; // update the height of the new Node 
+                  res->Tfather->gender = "father"; // update gender to the father 
+                  string ans = findGeneration(res->Tfather->height); // find the generation to the new father we add
+                  ans += res->Tfather->gender; // chaining the gender at the end of the string
+                  res->Tfather->rela = ans; // put the final generation to the new father 
+                  return *this; 
             }
-		else throw runtime_error("Error - " + son+ " has a father"); 
+		else throw runtime_error("Error - " + son + " has a father"); 
 	}
-	else throw runtime_error("Error - "+son+ " doesn't exist"); 
+	else throw runtime_error("Error - " + son + " doesn't exist"); 
 }
 
 Tree& Tree::addMother(string son, string mother) {
@@ -120,14 +118,16 @@ string Tree::find(string s) {
 	else throw runtime_error("unexist");
 }
 
-string Tree::findGeneration(int height){
+// Helper function that finds the amount of generations relative to the root
+// 0-Root, 1-Father/Mother, 2-Grandfather/Grandmother.....
+string Tree::findGeneration(int height){ 
   if( height <=1) return "";
   if(height == 2) return "grand"; 
   string ans = "";
-  for(int i=2; i < height; i++){
+  for(int i=2; i < height; i++) { // if height>2 so- chaining word "great-"
     ans = ans + "great-";
   }
-  ans = ans + "grand";
+  ans = ans + "grand"; // chaining word "gread" at the end
   return ans;
 }
 

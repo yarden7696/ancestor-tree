@@ -24,8 +24,8 @@ namespace family{
 			if(Tfather) delete Tfather;
 		};
 
-		Tree &addFather(string name, string father); // Adding a father to someone who already exists at the Tree
-		Tree &addMother(string name, string father);  // Adding a mother to someone who already exists at the Tree
+		Tree& addFather(string son, string father); // Adding a father to someone who already exists at the Tree
+		Tree& addMother(string son, string father);  // Adding a mother to someone who already exists at the Tree
 		void display(); // print the Tree
 		void remove(string toRemove); // Delete all sub-tree of the name we got
 		string find(string toSearch); // returns the name that feet to the relation we got  

@@ -5,15 +5,15 @@
 using namespace std;
 using namespace family;
 
-Tree* Tree::findWhere (Tree* cur, string toSearch){
-      if (cur->name==toSearch) return cur; 
+Tree* Tree::findTheSon (Tree* cur, string son){
+      if (cur->name==son) return cur; 
       if (cur->Tfather!=nullptr){
-        Tree* ans = findWhere(cur->Tfather, toSearch);
+        Tree* ans = findWhere(cur->Tfather, son);
         //we find where
         if(ans != nullptr) return ans;
       }
 	if (cur->Tmother!=nullptr){
-            Tree* ans = findWhere(cur->Tmother, toSearch);
+            Tree* ans = findWhere(cur->Tmother, son);
             if(ans != nullptr)
             return ans;
       }
@@ -21,7 +21,8 @@ Tree* Tree::findWhere (Tree* cur, string toSearch){
 }
 
 // Adding a father to someone who already exists in the Tree
-Tree& Tree::addFather(string son, string father){
+Tree& Tree::addFather(string son, string father) {
+	
 	Tree* toAdd = findWhere(this, son);
     //if we find where to add the father
 	if (toAdd != nullptr) {

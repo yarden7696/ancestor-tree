@@ -25,7 +25,7 @@ Tree& Tree::addFather(string son, string father) {
 	
 	Tree* res = findTheSon(this, son); // res is the node that we wont to add him father
 	if (res != nullptr) {
-            if (res->Tfather == nullptr) { // if res has no father so we will add him-
+            if (res->Tfather == nullptr) { // if res has no father yet so we will add him-
                   res->Tfather = new Tree(father); // create the Node's father 
                   res->Tfather->Tchild = res; // put to the father his son(res)
                   res->Tfather->height = res->height +1; // update the height of the new Node 
@@ -41,18 +41,17 @@ Tree& Tree::addFather(string son, string father) {
 }
 
 Tree& Tree::addMother(string son, string mother) {
-	Tree* res = findTheSon(this, son);
-    //if we find where to add
+	
+	Tree* res = findTheSon(this, son); // res is the node that we wont to add him mather
 	if (res != nullptr) {
-        //check if he doesn't have mother
-            if (res->Tmother == nullptr){
-                  res->Tmother = new Tree(mother);
-                  res->Tmother->Tchild = res;
-                  res->Tmother->height = res->height +1;
-                  res->Tmother->gender = "mother";
-                  string ans = findGeneration(res->Tmother->height);
-                  ans += res->Tmother->gender;
-                  res->Tmother->rela = ans;
+            if (res->Tmother == nullptr) { // if res has no mother yet so we will add him-
+                  res->Tmother = new Tree(mother);  // create the Node's mother
+                  res->Tmother->Tchild = res; // put to the mother her son(res)
+                  res->Tmother->height = res->height +1; // update the height of the new Node
+                  res->Tmother->gender = "mother"; // update gender to the mother
+                  string ans = findGeneration(res->Tmother->height); // find the generation to the new mother we add
+                  ans += res->Tmother->gender; // chaining the gender at the end of the string
+                  res->Tmother->rela = ans; // put the final generation to the new mother
                   return *this;
             }
 		else throw runtime_error("Error - " + son + " has a mother"); 
